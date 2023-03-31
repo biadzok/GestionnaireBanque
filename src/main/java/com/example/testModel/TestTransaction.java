@@ -27,8 +27,8 @@ public class TestTransaction {
         test.setMontant(1.9823);
         test.setType('d');
 
-        testEnregistrement("src/main/Data/saveList/testSauvegardeTransaction.ser", test);
-        Transaction test2 = testConstructeurDepuisFichier("src/main/Data/saveList/testSauvegardeTransaction.ser");
+        testEnregistrement("src/main/Data/saveList/testSauvegardeTransaction", test);
+        Transaction test2 = testConstructeurDepuisFichier("src/main/Data/saveList/testSauvegardeTransaction");
         printTransaction(test2);
     }
 }
