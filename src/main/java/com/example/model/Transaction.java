@@ -32,7 +32,9 @@ public class Transaction implements Serializable {
     }
 
     public Transaction(String nom, char type, double montant) {
-
+        this.Nom = nom;
+        this.type = type;
+        this.Montant = montant;
     }
 
     public Transaction(String path) {
