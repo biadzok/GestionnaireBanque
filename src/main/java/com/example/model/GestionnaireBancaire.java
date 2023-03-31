@@ -9,6 +9,16 @@ public class GestionnaireBancaire {
 
     private ArrayList<Taux> listeTaux;
 
+    private double solde;
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double solde) {
+        this.solde = solde;
+    }
+
     public ArrayList<Transaction> getListeTransaction() {
         return listeTransaction;
     }
