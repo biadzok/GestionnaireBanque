@@ -14,7 +14,7 @@ public class Controleur extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Controleur.class.getResource("IHM.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 200, Color.LIGHTGRAY);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("src/main/resources/3il_logo.jpg")));
+        stage.getIcons().add(new Image(Controleur.class.getResourceAsStream("/3il_logo.jpg")));
         stage.setTitle("Gestion banquaire");
         stage.setScene(scene);
         stage.setResizable(false);
