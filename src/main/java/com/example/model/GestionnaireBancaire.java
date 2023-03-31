@@ -1,11 +1,13 @@
 package com.example.model;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 public class GestionnaireBancaire {
 
     private ArrayList<Transaction> listeTransaction;
+
+    private ArrayList<Taux> listeTaux;
 
     public ArrayList<Transaction> getListeTransaction() {
         return listeTransaction;
@@ -15,8 +17,45 @@ public class GestionnaireBancaire {
         this.listeTransaction = listeTransaction;
     }
 
+    public ArrayList<Taux> getListeTaux() {
+        return listeTaux;
+    }
+
+    public void setListeTaux(ArrayList<Taux> listeTaux) {
+        this.listeTaux = listeTaux;
+    }
+
     public GestionnaireBancaire() {
-        listeTransaction = recupererTransactions("src/main/Data");
+        listeTransaction = recupererTransactions("src/main/Data/saveList");
+        try {
+            listeTaux = recupererTaux("src/main/Data/taux.txt");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    private ArrayList<Taux> recupererTaux(String path) throws IOException {
+        ArrayList<Taux> res = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        try {
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] results = line.split(" ");
+                String nom = results[0];
+                int inferieur = Integer.parseInt(results[1]);
+                int superieur = Integer.parseInt(results[2]);
+                double taux = Double.parseDouble(results[3]);
+                res.add(new Taux(nom, inferieur, superieur, taux));
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            br.close();
+        }
+
+        return res;
     }
 
 
@@ -39,9 +78,9 @@ public class GestionnaireBancaire {
             return null;
     }
 
-    public void sauvegarderTransactions() {
+    public void SaveList() {
         for (Transaction transaction : listeTransaction) {
-            transaction.saveTransaction("src/main/Data/" + transaction.getNom());
+            transaction.saveTransaction("src/main/Data/saveList/" + transaction.getNom());
         }
     }
 }
